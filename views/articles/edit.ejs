@@ -14,15 +14,12 @@
   </head>
   <body>
     <div class="container">
-     <h1 class="mb-4"><%= article.title %></h1>
-     <div class="text-muted mb-2"> <%= article.createdAt.toLocaleDateString() %></div>
-     <a class="btn btn-secondary" href="/">All Articles</a>
-     <a class="btn btn-info" href="/articles/edit/<%= article.id %>">Edit</a>
+     <h1 class="mb-4">Edit Article</h1>
 
-     <!-- here we will render plain markdown the way it was typed in the chat-box -->
-     <!-- we are using '-' and not '=' since we want to render the raw html and not the text string -->
-     <div>  <%- article.sanitizedHtml %></div>
-   
+<!-- http method for updating something  is put -->
+     <form action="/articles/<%=article.id %>?_method=PUT" method="POST">
+        <%- include('_form_fields') %>
+     </form>
 </div>
   </body>
 </html>

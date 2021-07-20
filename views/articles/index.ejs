@@ -10,15 +10,17 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../../assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
     <title>Blog</title>
   </head>
-  <body>
+  <body class=" mr-4 ml-4">
     <div class="container">
       <h1 class="mb-4">Blogs</h1>
       <a href="/articles/new" class="btn btn-success">New Article</a>
     </div>
     <% articles.forEach(article => { %>
-    <div class="card mt-4">
+    <div class="card mt-4 ">
       <div class="card-body">
         <h4 class="card-title"><%= article.title %></h4>
         <div class="card-subtitle text-muted mb-2">
@@ -26,7 +28,14 @@
         </div>
         <div class="card-rext mb-2"><%= article.description %></div>
       </div>
-      <a class="btn btn-primary"href="articles/<%= article.id %>">Read More</a>
+      <a style="width:15%" class="btn btn-xs btn-primary" href="articles/<%= article.slug %>">Read More</a>
+      <a style="width:15%" class="btn btn-xs mt-4 btn-info" href="articles/edit/<%= article.slug %>">Edit</a>
+      <!-- for delete we cannot use 'a' tag since that would  be a get request -->
+      <!-- when google crawls your website it uses every single link tag so every time google indexes your site they will delete everything in your database therefore we use a form-->
+      <!-- the post request will be overwritten with delete-->
+      <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="pls">
+        <button type="submit" class="btn btn-danger btn-md mt-4">Delete</button>
+      </form>
     </div>
     <% }); %>
   </body>
